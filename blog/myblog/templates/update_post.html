@@ -2,14 +2,21 @@
 {% block title %} Edit Blog post{% endblock %}
 
 {% block content %}
-    
-  <h1>Update blog post</h1>
-  <br/>
-  <div class-"form-group">
-    <form method="POST">
-      {% csrf_token %}
-      {{ form.as_p }}
-    <button class="btn btn-primary" type="submit">Update</button>
-    </form>
-  </div>
+{% if user.is_authenticated %}
+    <h1>Update blog post</h1>
+    <br/>
+    <div class-"form-group">
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+      <button class="btn btn-primary" type="submit">Update</button>
+      </form>
+    </div>
+{% else %}
+
+  <h1> You are not allowed to edit this post</h1>
+  <a href="{% url 'login' %}">Login</a>
+  <a href="{% url 'register' %}">Register</a>
+{% endif %} 
+
 {% endblock%}
