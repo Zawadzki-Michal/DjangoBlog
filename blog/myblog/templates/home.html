@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block content %}
+
+<h1>Welcome to Coding-Crossroads!</h1>
+<ul>
+  {% for post in object_list %}
+  <li>
+    <h2><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a></h2>
+    <h4>
+      {{ post.author.first_name }} {{ post.author.last_name }}  | Published: {{ post.post_date }}
+      <a class="btn btn-primary" href="{% url 'update_post' post.pk %}">Edit</a>
+      <a class="btn btn-danger" href="{% url 'delete_post' post.pk %}"
+        >Delete</a
+      >
+    </h4>
+
+    <p>{{ post.short_description }}</p>
+  </li>
+  {% endfor%}
+</ul>
+
+{% endblock%}
